@@ -1,16 +1,14 @@
 plugins {
-    alias(libs.plugins.mrplan.android.application)
-    alias(libs.plugins.mrplan.android.app.compose)
+    alias(libs.plugins.mrplan.android.library)
+    alias(libs.plugins.mrplan.android.lib.compose)
 }
 
 android {
-    namespace = "com.mr.mrplan"
+    namespace = "com.mr.presentation"
 }
 
 dependencies {
-    implementation(project(":presentation"))
     implementation(project(":domain"))
-    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
