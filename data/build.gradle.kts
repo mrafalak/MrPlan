@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.mrplan.android.library)
-    alias(libs.plugins.mrplan.android.lib.compose)
 }
 
 android {
@@ -8,5 +7,5 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":domain"))
 }
