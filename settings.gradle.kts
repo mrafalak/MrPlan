@@ -26,6 +26,6 @@ gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:t
 
 rootProject.name = "MrPlan"
 include(":app")
-include(":data")
-include(":domain")
 include(":presentation")
+include(":domain")
+include(":data")
