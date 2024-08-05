@@ -4,16 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "com.mr.presentation"
+    namespace = "com.mr.common"
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":common"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.ui.all)
 
