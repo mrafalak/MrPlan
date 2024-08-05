@@ -11,6 +11,8 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
+hilt = "2.44"
+voyager = "1.1.0-beta02"
 
 [libraries]
 # Android
@@ -37,6 +39,15 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+# Hilt dependencies
+hilt-android-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+
+# Voyager dependencies
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-hilt = { module = "cafe.adriel.voyager:voyager-hilt", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
@@ -53,3 +64,5 @@ mrplan-android-lib-compose = { id = "mrplan.android.lib.compose", version = "uns
 [bundles]
 ui-all = ["androidx-activity-compose", "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling",
     "androidx-ui-tooling-preview", "androidx-material3", "androidx-lifecycle-runtime-ktx"]
+hilt-all = ["hilt-android"]
+voyager-all = ["voyager-navigator", "voyager-hilt", "voyager-transitions"]

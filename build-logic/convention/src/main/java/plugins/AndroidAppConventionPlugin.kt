@@ -27,6 +27,8 @@ class AndroidAppConventionPlugin : Plugin<Project> {
                     versionCode = Config.android.versionCode
                     versionName = Config.android.versionName
                 }
+
+                buildFeatures.buildConfig = true
             }
         }
     }
