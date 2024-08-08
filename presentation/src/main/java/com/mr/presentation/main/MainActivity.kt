@@ -1,4 +1,4 @@
-package com.mr.mrplan.ui.main
+package com.mr.presentation.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
-import com.mr.common.base.navigation.AndroidScreen
+import com.mr.presentation.ui.AndroidScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 val LocalActivity = staticCompositionLocalOf<ComponentActivity> {
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
     private fun setContent(initialScreen: AndroidScreen? = null) {
         setContent {
             CompositionLocalProvider(LocalActivity provides this) {
-                MainScreen(viewModel = viewModel, initialScreen = initialScreen)
+                MainScreen(initialScreen = initialScreen)
             }
         }
     }

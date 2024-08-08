@@ -16,10 +16,10 @@ kotlin {
 }
 
 dependencies {
-    compileOnly(libs.gradle)
-    compileOnly(libs.jetbrains.kotlin.gradle.plugin)
-    compileOnly(libs.compose.gradlePlugin)
-    compileOnly(libs.hilt.android.plugin)
+    implementation(libs.gradle)
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.compose.gradlePlugin)
+    implementation(libs.hilt.android.gradle.plugin)
 }
 
 gradlePlugin {

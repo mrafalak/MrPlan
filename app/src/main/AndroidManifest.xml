@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MrPlan">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.mr.presentation.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MrPlan">
             <intent-filter>

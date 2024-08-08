@@ -11,7 +11,6 @@ class AndroidLibComposeConventionPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         with(project) {
             with(pluginManager) {
-                apply("com.android.library")
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
 

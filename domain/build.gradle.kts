@@ -5,3 +5,7 @@ plugins {
 android {
     namespace = "com.mr.domain"
 }
+
+dependencies {
+    implementation(project(":common"))
+}
