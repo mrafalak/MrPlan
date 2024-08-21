@@ -11,6 +11,7 @@ import com.mr.presentation.home.base.AndroidScreenHome
 import com.mr.presentation.home.base.HomeViewModel
 import com.mr.presentation.home.base.TopBarState
 import com.mr.presentation.navigation.MrNavigator
+import com.mr.presentation.navigation.actions.TopBarNavigationAction
 import com.mr.presentation.ui.components.bars.TopBarConfig
 
 class BookListScreen : AndroidScreenHome() {
@@ -22,6 +23,7 @@ class BookListScreen : AndroidScreenHome() {
                 navigator = navigator,
                 config = TopBarConfig(
                     titleResId = R.string.nav_book_list,
+                    navigationAction = TopBarNavigationAction.Menu(homeViewModel),
                 )
             )
         )

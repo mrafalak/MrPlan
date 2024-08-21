@@ -4,7 +4,6 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,7 +25,6 @@ fun HomeTabNavigator(
 ) {
     TabNavigator(tab = tab) {
         Scaffold(
-            modifier = Modifier.systemBarsPadding(),
             topBar = {
                 TopBar(topBarState)
             },

@@ -16,6 +16,7 @@ import com.mr.presentation.home.base.LocalHomeNavigator
 import com.mr.presentation.home.base.TopBarState
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.actions.TopBarAction
+import com.mr.presentation.navigation.actions.TopBarNavigationAction
 import com.mr.presentation.ui.components.bars.TopBarConfig
 import kotlinx.coroutines.flow.collectLatest
 
@@ -30,6 +31,7 @@ class GoalListScreen : AndroidScreenHome() {
                 navigator = navigator,
                 config = TopBarConfig(
                     titleResId = R.string.nav_goal_list,
+                    navigationAction = TopBarNavigationAction.Menu(homeViewModel),
                     actions = listOf(
                         TopBarAction.Add(viewModel, R.string.ic_goal_add)
                     )

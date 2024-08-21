@@ -5,6 +5,7 @@
     <string name="nav_label_training">Training</string>
     <string name="nav_label_note">Note</string>
     <string name="nav_back">Back</string>
+    <string name="nav_menu">Menu</string>
     <string name="nav_goal_list">Goals</string>
     <string name="nav_book_list">Books</string>
     <string name="nav_training_list">Trainings</string>

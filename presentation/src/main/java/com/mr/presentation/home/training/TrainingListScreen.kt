@@ -8,6 +8,7 @@ import com.mr.presentation.home.base.AndroidScreenHome
 import com.mr.presentation.home.base.HomeViewModel
 import com.mr.presentation.home.base.TopBarState
 import com.mr.presentation.navigation.MrNavigator
+import com.mr.presentation.navigation.actions.TopBarNavigationAction
 import com.mr.presentation.ui.components.bars.TopBarConfig
 
 class TrainingListScreen : AndroidScreenHome() {
@@ -19,6 +20,7 @@ class TrainingListScreen : AndroidScreenHome() {
                 navigator = navigator,
                 config = TopBarConfig(
                     titleResId = R.string.nav_training_list,
+                    navigationAction = TopBarNavigationAction.Menu(homeViewModel),
                 )
             )
         )
