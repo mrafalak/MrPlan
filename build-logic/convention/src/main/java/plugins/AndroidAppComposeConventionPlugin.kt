@@ -11,7 +11,6 @@ class AndroidAppComposeConventionPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         with(project) {
             with(pluginManager) {
-                apply("com.android.application")
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
 

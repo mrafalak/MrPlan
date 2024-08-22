@@ -1,4 +1,4 @@
-package com.mr.common.base.navigation
+package com.mr.presentation.ui
 
 import androidx.compose.runtime.Stable
 import cafe.adriel.voyager.core.screen.Screen
