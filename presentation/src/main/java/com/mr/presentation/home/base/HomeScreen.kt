@@ -64,25 +64,22 @@ class HomeScreen : AndroidScreen() {
         }
 
         CompositionLocalProvider(LocalHomeViewModel provides viewModel) {
-            Scaffold { innerPaddings ->
-                ModalNavigationDrawer(
-                    drawerContent = {
-                        HomeNavDrawer(
-                            modifier = Modifier.padding(innerPaddings),
-                            state = state,
-                            scope = scope,
-                            navigator = navigator
-                        )
-                    },
-                    drawerState = state.drawerState
-                ) {
-                    HomeTabNavigator(
-                        tabs = bottomBarTabs,
-                        tab = tab,
-                        bottomBarVisible = bottomBarVisible,
-                        topBarState = topBarState
+            ModalNavigationDrawer(
+                drawerContent = {
+                    HomeNavDrawer(
+                        state = state,
+                        scope = scope,
+                        navigator = navigator
                     )
-                }
+                },
+                drawerState = state.drawerState
+            ) {
+                HomeTabNavigator(
+                    tabs = bottomBarTabs,
+                    tab = tab,
+                    bottomBarVisible = bottomBarVisible,
+                    topBarState = topBarState
+                )
             }
         }
     }
