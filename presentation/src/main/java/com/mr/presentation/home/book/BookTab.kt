@@ -8,6 +8,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.mr.presentation.R
 import com.mr.presentation.home.base.HomeNavigator
+import com.mr.domain.model.HomeTabEnum
 
 class BookTab : Tab {
 
@@ -19,7 +20,7 @@ class BookTab : Tab {
 
             return remember {
                 TabOptions(
-                    index = 1u,
+                    index = HomeTabEnum.BOOK.index,
                     title = title,
                     icon = icon
                 )

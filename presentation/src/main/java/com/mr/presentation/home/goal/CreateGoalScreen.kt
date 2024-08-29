@@ -10,20 +10,32 @@ import com.mr.presentation.R
 import com.mr.presentation.home.base.AndroidScreenHome
 import com.mr.presentation.home.base.HomeViewModel
 import com.mr.presentation.home.base.TopBarState
+import com.mr.presentation.main.LocalActivity
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.actions.TopBarNavigationAction
+import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.ui.components.bars.TopBarConfig
 
 class CreateGoalScreen : AndroidScreenHome() {
 
     @Composable
-    override fun SetTopBarState(homeViewModel: HomeViewModel, navigator: MrNavigator) {
+    override fun SetTopBarState(
+        homeViewModel: HomeViewModel,
+        navigator: MrNavigator,
+        defaultNavBackScreen: AndroidScreen?
+    ) {
+        val activity = LocalActivity.current
+
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,
                 config = TopBarConfig(
                     titleResId = R.string.nav_goal_create,
-                    navigationAction = TopBarNavigationAction.NavigationBack(navigator)
+                    navigationAction = TopBarNavigationAction.NavigationBack(
+                        activity = activity,
+                        navigator = navigator,
+                        defaultNavBackScreen = defaultNavBackScreen
+                    )
                 ),
             )
         )
@@ -31,6 +43,7 @@ class CreateGoalScreen : AndroidScreenHome() {
 
     @Composable
     override fun Content() {
+        defaultNavBackScreen = GoalListScreen()
         super.Content()
 
         Column(

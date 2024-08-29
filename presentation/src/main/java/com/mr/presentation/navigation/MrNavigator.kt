@@ -5,6 +5,7 @@ import cafe.adriel.voyager.core.stack.StackEvent
 import cafe.adriel.voyager.navigator.Navigator
 import com.mr.presentation.navigation.stack.DebounceStackWrapper
 import com.mr.presentation.navigation.stack.Stack
+import com.mr.presentation.navigation.stack.VoyagerNavigationStack
 import com.mr.presentation.navigation.stack.WatcherWrapper
 
 interface MrNavigator : Stack<Screen, StackEvent> {

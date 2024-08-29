@@ -1,4 +1,4 @@
-package com.mr.presentation.home.goal
+package com.mr.presentation.home.note
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -15,34 +15,20 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class GoalListState(
-    val testTextField: TextFieldValue = TextFieldValue(""),
-)
 
 @HiltViewModel
-class GoalListViewModel @Inject constructor() : ViewModel(), AddActionHandler {
+class NoteListViewModel @Inject constructor() : ViewModel(), AddActionHandler {
 
-    private val _state = MutableStateFlow(GoalListState())
-    val state = _state.asStateFlow()
-
-    private val _effect = Channel<GoalListEffect>()
+    private val _effect = Channel<NoteListEffect>()
     val effect = _effect.receiveAsFlow()
 
     override fun onAdd() {
         viewModelScope.launch {
-            _effect.send(GoalListEffect.NavigateToCreateGoal)
-        }
-    }
-
-    fun updateTextField(textField: TextFieldValue = TextFieldValue("")) {
-        _state.update {
-            it.copy(
-                testTextField = textField,
-            )
+            _effect.send(NoteListEffect.NavigateToCreateNote)
         }
     }
 }
 
-sealed class GoalListEffect {
-    data object NavigateToCreateGoal : GoalListEffect()
+sealed class NoteListEffect {
+    data object NavigateToCreateNote : NoteListEffect()
 }

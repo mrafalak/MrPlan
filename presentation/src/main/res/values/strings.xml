@@ -7,11 +7,17 @@
     <string name="nav_back">Back</string>
     <string name="nav_menu">Menu</string>
     <string name="nav_goal_list">Goals</string>
+    <string name="nav_goal_details">Goal Details</string>
     <string name="nav_book_list">Books</string>
     <string name="nav_training_list">Trainings</string>
     <string name="nav_note_list">Notes</string>
     <string name="nav_goal_create">Create goal</string>
+    <string name="nav_note_create">Create note</string>
 
     <!--Top bar icons-->
     <string name="ic_goal_add">Add new goal</string>
+    <string name="ic_note_add">Add new note</string>
+
+    <!--Toast-->
+    <string name="toast_login_to_continue">Log in to continue</string>
 </resources>
