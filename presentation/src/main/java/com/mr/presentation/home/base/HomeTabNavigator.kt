@@ -15,9 +15,12 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.mr.domain.model.DeepLink
 import com.mr.domain.navigation.UiConfig
+import com.mr.presentation.home.book.BookTab
 import com.mr.presentation.home.goal.GoalTab
+import com.mr.presentation.home.note.NoteTab
+import com.mr.presentation.home.training.TrainingTab
 import com.mr.presentation.ui.components.bars.BottomBar
 import com.mr.presentation.ui.components.bars.TopBar
 import kotlinx.coroutines.flow.collectLatest
@@ -25,18 +28,15 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun HomeTabNavigator(
     tabs: List<Tab>,
-    tab: Tab,
+    initialTab: Tab,
     bottomBarVisible: Boolean,
     topBarState: TopBarState,
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
+    deepLinkPath: String? = null
 ) {
-    TabNavigator(tab = tab) {
+    TabNavigator(tab = initialTab) {
         val tabNavigator = LocalTabNavigator.current
         val state by viewModel.state.collectAsState()
-
-        val tabWithOptions: Map<Tab, TabOptions> = tabs.associateWith { tab ->
-            tab.options
-        }
 
         LaunchedEffect(viewModel.effect) {
             viewModel.effect.collectLatest {
@@ -50,16 +50,28 @@ fun HomeTabNavigator(
                     }
 
                     is HomeEffect.NavigateToGoalTab -> {
-                        println("DeepLink - TabNavigator handle deep link")
-                        val goalTab = tabs.firstOrNull { tab ->
-                            tab is GoalTab
-                        }
-
-                        if (goalTab != null) {
-                            tabNavigator.current = GoalTab(it.deepLink.fullPath)
-                        }
+                        tabNavigator.current = GoalTab(it.deepLink.fullPath)
                     }
+
+                    is HomeEffect.NavigateToBookTab -> {
+                        tabNavigator.current = BookTab(it.deepLink.fullPath)
+                    }
+
+                    is HomeEffect.NavigateToTrainingTab -> {
+                        tabNavigator.current = TrainingTab(it.deepLink.fullPath)
+                    }
+
+                    is HomeEffect.NavigateToNoteTab -> {
+                        tabNavigator.current = NoteTab(it.deepLink.fullPath)
+                    }
+
                 }
+            }
+        }
+
+        LaunchedEffect(key1 = deepLinkPath) {
+            deepLinkPath?.let {
+                viewModel.handleDeepLink(DeepLink.parse(deepLinkPath))
             }
         }
 

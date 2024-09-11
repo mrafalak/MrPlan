@@ -10,7 +10,9 @@ import com.mr.presentation.R
 import com.mr.presentation.home.base.HomeNavigator
 import com.mr.domain.model.HomeTabEnum
 
-class TrainingTab : Tab {
+class TrainingTab(
+    private val deepLinkPath: String? = null
+) : Tab {
 
     override val options: TabOptions
         @Composable

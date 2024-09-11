@@ -1,6 +1,5 @@
 package com.mr.domain.repository
 
-import android.net.Uri
 import com.mr.domain.model.DeepLink
 import kotlinx.coroutines.flow.SharedFlow
 

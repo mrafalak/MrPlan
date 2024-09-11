@@ -58,7 +58,6 @@ class NoteListScreen : AndroidScreenHome() {
             viewModel.effect.collectLatest {
                 when (it) {
                     NoteListEffect.NavigateToCreateNote -> {
-                        println("DeepLink - NoteListScreen handle deep link")
                         navigator.push(CreateNoteScreen())
                     }
                 }

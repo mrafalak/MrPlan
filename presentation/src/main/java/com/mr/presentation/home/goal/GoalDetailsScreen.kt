@@ -43,12 +43,8 @@ class GoalDetailsScreen : AndroidScreenHome() {
 
     @Composable
     override fun Content() {
-        println("Navigate - GoalDetailsScreen start defaultNavBackScreen = GoalListScreen()")
         defaultNavBackScreen = GoalListScreen()
-        println("Navigate - GoalDetailsScreen end defaultNavBackScreen = GoalListScreen()")
-        println("Navigate - GoalDetailsScreen start super.Content()")
         super.Content()
-        println("Navigate - GoalDetailsScreen end super.Content()")
 
         Column(
             modifier = Modifier.fillMaxSize()

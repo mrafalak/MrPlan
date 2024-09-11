@@ -1,6 +1,5 @@
 package com.mr.presentation.home.base
 
-import android.content.Intent
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.lifecycle.LiveData
@@ -13,27 +12,23 @@ import com.mr.domain.model.DeepLinkHomeDirection
 import com.mr.domain.repository.DeepLinkRepository
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.actions.MenuNavigationHandler
-import com.mr.domain.model.DeepLinkMainDirection
+import com.mr.domain.model.toDeepLinkHomeDirection
 import com.mr.presentation.home.book.BookTab
 import com.mr.presentation.home.goal.GoalTab
 import com.mr.presentation.home.note.NoteTab
 import com.mr.presentation.home.training.TrainingTab
-import com.mr.presentation.main.MainEffect
-import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.ui.components.bars.TopBarConfig
-import com.mr.presentation.welcome.WelcomeScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class HomeState(
-    val initialTab: Tab = GoalTab(),
+    val initialTab: Tab = NoteTab(),
     val bottomBarTabs: List<Tab> = listOf(
         GoalTab(),
         BookTab(),
@@ -61,7 +56,6 @@ class HomeViewModel @Inject constructor(
     val bottomBarVisible: LiveData<Boolean> = _bottomBarVisible
 
     init {
-        println("DeepLink - HomeViewModel init")
         viewModelScope.launch {
             deepLinkRepository.pendingDeepLink.collectLatest { deepLink ->
                 handleDeepLink(deepLink)
@@ -69,15 +63,28 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun handleDeepLink(deepLink: DeepLink) {
+    fun handleDeepLink(deepLink: DeepLink) {
         viewModelScope.launch {
-//            println("DeepLink - HomeViewModel handleDeepLink")
-            when (deepLink.subPaths.first()) {
-                DeepLinkHomeDirection.GOAL.path -> {
+            val homeDirection = deepLink.subPaths.firstOrNull()?.toDeepLinkHomeDirection()
+                ?: DeepLinkHomeDirection.NONE
+            when (homeDirection) {
+                DeepLinkHomeDirection.GOAL -> {
                     _effect.send(HomeEffect.NavigateToGoalTab(deepLink))
                 }
 
-                else -> Unit
+                DeepLinkHomeDirection.BOOK -> {
+                    _effect.send(HomeEffect.NavigateToBookTab(deepLink))
+                }
+
+                DeepLinkHomeDirection.TRAINING -> {
+                    _effect.send(HomeEffect.NavigateToTrainingTab(deepLink))
+                }
+
+                DeepLinkHomeDirection.NOTE -> {
+                    _effect.send(HomeEffect.NavigateToNoteTab(deepLink))
+                }
+
+                DeepLinkHomeDirection.NONE -> Unit
             }
         }
     }
@@ -99,43 +106,6 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
-    fun determineInitialTab(deepLinkPath: String?): Tab {
-        val defaultTab = state.value.bottomBarTabs.last()
-
-        return if (deepLinkPath == null) {
-            defaultTab
-        } else {
-            val deepLink = DeepLink.parse(deepLinkPath)
-
-            when (deepLink.subPaths.first()) {
-                DeepLinkHomeDirection.GOAL.path -> {
-                    println("DeepLink - HomeScreen handle deep link")
-                    GoalTab(deepLink.fullPath)
-                }
-
-                DeepLinkHomeDirection.BOOK.path -> {
-                    BookTab()
-                }
-
-                DeepLinkHomeDirection.TRAINING.path -> {
-                    TrainingTab()
-                }
-
-                DeepLinkHomeDirection.NOTE.path -> {
-                    NoteTab()
-                }
-
-                else -> defaultTab
-            }
-        }
-
-//        setInitialTab(tab = initialTab)
-    }
-
-    private fun setInitialTab(tab: Tab) {
-        _state.update { it.copy(initialTab = tab) }
-    }
 }
 
 sealed class TopBarState {
@@ -149,4 +119,7 @@ sealed class TopBarState {
 sealed class HomeEffect {
     data class OnMenuClick(val showMenu: Boolean = false) : HomeEffect()
     data class NavigateToGoalTab(val deepLink: DeepLink) : HomeEffect()
+    data class NavigateToBookTab(val deepLink: DeepLink) : HomeEffect()
+    data class NavigateToTrainingTab(val deepLink: DeepLink) : HomeEffect()
+    data class NavigateToNoteTab(val deepLink: DeepLink) : HomeEffect()
 }

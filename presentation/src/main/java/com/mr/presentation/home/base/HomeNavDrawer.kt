@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.settings.SettingsScreen
-import com.mr.presentation.welcome.WelcomeScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

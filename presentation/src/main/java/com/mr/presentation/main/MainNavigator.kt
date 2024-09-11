@@ -55,22 +55,18 @@ private fun handleNavigateToHomeScreen(
     isUserLogged: Boolean,
     deepLinkFullPath: String
 ) {
-    // TODO clean code
     val isHomeScreenInStack: Boolean = navigator.items.any { screen ->
         screen is HomeScreen
     }
 
     when {
         isHomeScreenInStack -> {
-            println("DeepLink - MainNavigator handle deep link - HomeScreen in stack")
-            // HomeViewModel handle deep link
             navigator.noDebounce.popUntil { screen ->
                 screen is HomeScreen
             }
         }
 
         isUserLogged -> {
-            println("DeepLink - MainNavigator handle deep link - HomeScreen not in stack")
             navigator.noDebounce.push(HomeScreen(deepLinkFullPath))
         }
 

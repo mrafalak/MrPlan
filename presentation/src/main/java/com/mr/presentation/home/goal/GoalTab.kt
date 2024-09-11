@@ -11,15 +11,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.mr.domain.model.DeepLink
-import com.mr.domain.model.DeepLinkGoalDirection
 import com.mr.presentation.R
 import com.mr.presentation.home.base.HomeNavigator
 import com.mr.domain.model.HomeTabEnum
-import com.mr.domain.navigation.UiConfig
-import com.mr.presentation.home.base.AndroidScreenHome
-import com.mr.presentation.home.base.LocalHomeNavigator
-import com.mr.presentation.ui.LoadingScreen
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 
 class GoalTab(
@@ -51,8 +45,11 @@ class GoalTab(
                 viewModel.effect.collectLatest {
                     when (it) {
                         GoalEffect.NavigateToGoalDetails -> {
-                            println("DeepLink - GoalTab view model effect handle deep link")
                             homeNavigator.noDebounce.push(GoalDetailsScreen())
+                        }
+
+                        GoalEffect.NavigateToGoalCreate -> {
+                            homeNavigator.noDebounce.push(CreateGoalScreen())
                         }
                     }
                 }

@@ -11,14 +11,10 @@ fun navigateBack(
     defaultNavBackScreen: AndroidScreen? = null
 ) {
     if (navigator.canPop) {
-        println("Navigate Pop")
         navigator.pop()
     } else if (defaultNavBackScreen != null) {
-        println("Navigate Replace")
         navigator.replace(defaultNavBackScreen as Screen)
     } else {
-        // TODO show message about leaving the application
-        println("Navigate finish")
         activity.finish()
     }
 }

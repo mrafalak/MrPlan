@@ -17,10 +17,7 @@ abstract class AndroidScreenHome : AndroidScreen() {
         val navigator = LocalHomeNavigator.current
         val homeViewModel = LocalHomeViewModel.current
 
-//        println("Navigate - GoalDetailsScreen updateBackHandler start")
         BackHandler {
-//            println("Navigate - Custom back handler")
-
             navigateBack(activity, navigator, defaultNavBackScreen)
         }
 

@@ -32,8 +32,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.mr.domain.navigation.UiConfig
 import com.mr.presentation.home.base.TopBarState
-import com.mr.presentation.navigation.MrNavigator
-import com.mr.presentation.navigation.actions.TopBarNavigationAction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

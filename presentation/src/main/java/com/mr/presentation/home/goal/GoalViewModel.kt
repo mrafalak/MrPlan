@@ -1,25 +1,19 @@
 package com.mr.presentation.home.goal
 
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mr.domain.model.DeepLink
 import com.mr.domain.model.DeepLinkGoalDirection
 import com.mr.domain.model.DeepLinkHomeDirection
+import com.mr.domain.model.toDeepLinkGoalDirection
 import com.mr.domain.repository.DeepLinkRepository
-import com.mr.presentation.BuildConfig
 import com.mr.presentation.home.base.AndroidScreenHome
-import com.mr.presentation.main.MainActivityState
-import com.mr.presentation.ui.AndroidScreen
-import com.mr.presentation.ui.LoadingScreen
-import com.mr.presentation.welcome.WelcomeScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,7 +33,6 @@ class GoalViewModel @Inject constructor(
     val effect = _effect.receiveAsFlow()
 
     init {
-        println("DeepLink - GoalViewModel init")
         viewModelScope.launch {
             deepLinkRepository.pendingDeepLink.collectLatest { deepLink ->
                 handleDeepLink(deepLink)
@@ -49,7 +42,6 @@ class GoalViewModel @Inject constructor(
 
     fun handleDeepLink(deepLink: DeepLink) {
         viewModelScope.launch {
-            println("DeepLink - GoalViewModel handle deep link")
             if (isGoalDeepLink(deepLink)) {
                 val goalDirection = determineDeepLinkGoalDirection(deepLink)
                 when (goalDirection) {
@@ -57,8 +49,11 @@ class GoalViewModel @Inject constructor(
                         _effect.send(GoalEffect.NavigateToGoalDetails)
                     }
 
-                    DeepLinkGoalDirection.CREATE -> TODO()
-                    DeepLinkGoalDirection.NONE -> TODO()
+                    DeepLinkGoalDirection.CREATE -> {
+                        _effect.send(GoalEffect.NavigateToGoalCreate)
+                    }
+
+                    DeepLinkGoalDirection.NONE -> Unit
                 }
             }
         }
@@ -74,15 +69,11 @@ class GoalViewModel @Inject constructor(
 
     private fun determineDeepLinkGoalDirection(deepLink: DeepLink): DeepLinkGoalDirection {
         val goalSubPaths = createGoalSubPathList(deepLink)
-
-        return when {
-            goalSubPaths.first() == DeepLinkGoalDirection.DETAILS.path -> DeepLinkGoalDirection.DETAILS
-            goalSubPaths.first() == DeepLinkGoalDirection.CREATE.path -> DeepLinkGoalDirection.CREATE
-            else -> DeepLinkGoalDirection.NONE
-        }
+        return goalSubPaths.firstOrNull()?.toDeepLinkGoalDirection() ?: DeepLinkGoalDirection.NONE
     }
 }
 
 sealed class GoalEffect {
     data object NavigateToGoalDetails : GoalEffect()
+    data object NavigateToGoalCreate : GoalEffect()
 }

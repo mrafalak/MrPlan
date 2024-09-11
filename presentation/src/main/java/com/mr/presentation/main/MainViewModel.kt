@@ -1,7 +1,6 @@
 package com.mr.presentation.main
 
 import android.content.Intent
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mr.domain.model.DeepLink
@@ -10,7 +9,6 @@ import com.mr.domain.model.DeepLinkMainDirection
 import com.mr.domain.repository.SessionRepository
 import com.mr.presentation.home.base.HomeScreen
 import com.mr.presentation.ui.AndroidScreen
-import com.mr.presentation.ui.LoadingScreen
 import com.mr.presentation.welcome.WelcomeScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
