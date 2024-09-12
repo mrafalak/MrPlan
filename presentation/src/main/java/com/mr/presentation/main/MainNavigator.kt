@@ -21,9 +21,9 @@ fun MainNavigator(
     initialScreen: AndroidScreen,
     viewModel: MainViewModel
 ) {
-    MrNavigatorProvider(initialScreen = initialScreen) { navigator ->
-        HandleMainEffect(viewModel = viewModel)
-        DefaultFadeTransition(navigator)
+    MrNavigatorProvider(initialScreen = initialScreen) { defaultNavigator ->
+        HandleMainEffect(viewModel)
+        DefaultFadeTransition(defaultNavigator)
     }
 }
 
@@ -71,8 +71,8 @@ private fun handleNavigateToHomeScreen(
         }
 
         else -> {
-            val message = context.getString(R.string.toast_login_to_continue)
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            val errorMessage = context.getString(R.string.toast_login_to_continue)
+            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
         }
     }
 }

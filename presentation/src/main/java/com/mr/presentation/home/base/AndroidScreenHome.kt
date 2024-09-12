@@ -1,5 +1,6 @@
 package com.mr.presentation.home.base
 
+import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -21,12 +22,13 @@ abstract class AndroidScreenHome : AndroidScreen() {
             navigateBack(activity, navigator, defaultNavBackScreen)
         }
 
-        SetTopBarState(homeViewModel, navigator, defaultNavBackScreen)
+        SetTopBarState(activity, homeViewModel, navigator, defaultNavBackScreen)
         SetBottomBarVisibility(homeViewModel)
     }
 
     @Composable
     open fun SetTopBarState(
+        activity: Activity,
         homeViewModel: HomeViewModel,
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?

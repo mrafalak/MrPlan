@@ -1,5 +1,6 @@
 package com.mr.presentation.home.note
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -10,7 +11,6 @@ import com.mr.presentation.R
 import com.mr.presentation.home.base.AndroidScreenHome
 import com.mr.presentation.home.base.HomeViewModel
 import com.mr.presentation.home.base.TopBarState
-import com.mr.presentation.main.LocalActivity
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.actions.TopBarNavigationAction
 import com.mr.presentation.ui.AndroidScreen
@@ -20,12 +20,11 @@ class CreateNoteScreen : AndroidScreenHome() {
 
     @Composable
     override fun SetTopBarState(
+        activity: Activity,
         homeViewModel: HomeViewModel,
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?
     ) {
-        val activity = LocalActivity.current
-
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,

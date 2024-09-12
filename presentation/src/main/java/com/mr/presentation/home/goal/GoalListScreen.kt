@@ -1,5 +1,6 @@
 package com.mr.presentation.home.goal
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.BasicTextField
@@ -28,6 +29,7 @@ class GoalListScreen : AndroidScreenHome() {
 
     @Composable
     override fun SetTopBarState(
+        activity: Activity,
         homeViewModel: HomeViewModel,
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?

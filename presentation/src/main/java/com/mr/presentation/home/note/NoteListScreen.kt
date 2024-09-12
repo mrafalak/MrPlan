@@ -1,5 +1,6 @@
 package com.mr.presentation.home.note
 
+import android.app.Activity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ class NoteListScreen : AndroidScreenHome() {
 
     @Composable
     override fun SetTopBarState(
+        activity: Activity,
         homeViewModel: HomeViewModel,
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?
@@ -50,7 +52,6 @@ class NoteListScreen : AndroidScreenHome() {
     @Composable
     override fun Content() {
         super.Content()
-
         val navigator = LocalHomeNavigator.current
         val viewModel: NoteListViewModel = hiltViewModel()
 

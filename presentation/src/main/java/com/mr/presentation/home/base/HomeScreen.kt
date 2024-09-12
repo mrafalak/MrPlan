@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,9 +26,6 @@ class HomeScreen(
         val navigator = LocalMrNavigator.current
         val scope = rememberCoroutineScope()
 
-        val bottomBarVisible by viewModel.bottomBarVisible.observeAsState(false)
-        val topBarState by viewModel.topBarState.observeAsState(TopBarState.None)
-
         CompositionLocalProvider(LocalHomeViewModel provides viewModel) {
             ModalNavigationDrawer(
                 drawerContent = {
@@ -44,8 +40,8 @@ class HomeScreen(
                 HomeTabNavigator(
                     tabs = state.bottomBarTabs,
                     initialTab = state.initialTab,
-                    bottomBarVisible = bottomBarVisible,
-                    topBarState = topBarState,
+                    bottomBarVisible = state.bottomBarVisible,
+                    topBarState = state.topBarState,
                     viewModel = viewModel,
                     deepLinkPath = deepLinkPath
                 )

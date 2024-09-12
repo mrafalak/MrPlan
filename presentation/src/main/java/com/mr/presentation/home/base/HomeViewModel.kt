@@ -2,8 +2,6 @@ package com.mr.presentation.home.base
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.navigator.tab.Tab
@@ -24,17 +22,20 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class HomeState(
-    val initialTab: Tab = NoteTab(),
+    val initialTab: Tab = GoalTab(),
     val bottomBarTabs: List<Tab> = listOf(
         GoalTab(),
         BookTab(),
         TrainingTab(),
         NoteTab(),
     ),
+    val topBarState: TopBarState = TopBarState.None,
+    val bottomBarVisible: Boolean = false,
     val drawerState: DrawerState = DrawerState(initialValue = DrawerValue.Closed),
 )
 
@@ -48,12 +49,6 @@ class HomeViewModel @Inject constructor(
 
     private val _effect = Channel<HomeEffect>()
     val effect = _effect.receiveAsFlow()
-
-    private val _topBarState = MutableLiveData<TopBarState>(TopBarState.None)
-    val topBarState: LiveData<TopBarState> = _topBarState
-
-    private val _bottomBarVisible = MutableLiveData(false)
-    val bottomBarVisible: LiveData<Boolean> = _bottomBarVisible
 
     init {
         viewModelScope.launch {
@@ -90,11 +85,11 @@ class HomeViewModel @Inject constructor(
     }
 
     fun setTopBarState(state: TopBarState) {
-        _topBarState.value = state
+        _state.update { it.copy(topBarState = state) }
     }
 
     fun setBottomBarVisible(visible: Boolean) {
-        _bottomBarVisible.value = visible
+        _state.update { it.copy(bottomBarVisible = visible) }
     }
 
     override fun onClickMenu() {

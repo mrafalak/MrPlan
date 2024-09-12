@@ -13,8 +13,8 @@ data class DeepLink(
             val path = uri.path.orEmpty()
             val segments = path.trimStart('/').split("/")
 
-            val mainDirectionString = segments.firstOrNull().orEmpty()
-            val mainDirection = mainDirectionString.toDeepLinkMainDirection()
+            val mainDirection =
+                segments.firstOrNull()?.toDeepLinkMainDirection() ?: DeepLinkMainDirection.NONE
 
             val subPaths = if (segments.size > 1) {
                 segments.subList(1, segments.size)

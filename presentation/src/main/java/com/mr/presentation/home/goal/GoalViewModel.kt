@@ -60,7 +60,7 @@ class GoalViewModel @Inject constructor(
     }
 
     private fun isGoalDeepLink(deepLink: DeepLink): Boolean {
-        return deepLink.subPaths.first() == DeepLinkHomeDirection.GOAL.path
+        return deepLink.subPaths.firstOrNull() == DeepLinkHomeDirection.GOAL.path
     }
 
     private fun createGoalSubPathList(deepLink: DeepLink): List<String> {

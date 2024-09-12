@@ -6,6 +6,8 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.mr.presentation.R
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.settings.SettingsScreen
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +22,7 @@ fun HomeNavDrawer(
 ) {
     ModalDrawerSheet(modifier = modifier) {
         NavigationDrawerItem(
-            label = { Text("Settings") },
+            label = { Text(stringResource(id = R.string.nav_settings)) },
             selected = false,
             onClick = {
                 navigator.push(SettingsScreen())
