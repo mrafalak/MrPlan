@@ -8,8 +8,11 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.mr.presentation.R
 import com.mr.presentation.home.base.HomeNavigator
+import com.mr.domain.model.HomeTabEnum
 
-class NoteTab : Tab {
+class NoteTab(
+    private val deepLinkPath: String? = null
+) : Tab {
 
     override val options: TabOptions
         @Composable
@@ -19,7 +22,7 @@ class NoteTab : Tab {
 
             return remember {
                 TabOptions(
-                    index = 4u,
+                    index = HomeTabEnum.NOTE.index,
                     title = title,
                     icon = icon
                 )

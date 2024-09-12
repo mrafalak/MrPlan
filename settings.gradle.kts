@@ -22,8 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:testClasses"))
-
 rootProject.name = "MrPlan"
 include(":app")
 include(":presentation")

@@ -1,24 +1,38 @@
 package com.mr.presentation.home.base
 
+import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import com.mr.presentation.main.LocalActivity
 import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.navigation.MrNavigator
+import com.mr.presentation.navigation.actions.navigateBack
 
 @Stable
 abstract class AndroidScreenHome : AndroidScreen() {
 
     @Composable
     override fun Content() {
+        val activity = LocalActivity.current
         val navigator = LocalHomeNavigator.current
         val homeViewModel = LocalHomeViewModel.current
 
-        SetTopBarState(homeViewModel, navigator)
+        BackHandler {
+            navigateBack(activity, navigator, defaultNavBackScreen)
+        }
+
+        SetTopBarState(activity, homeViewModel, navigator, defaultNavBackScreen)
         SetBottomBarVisibility(homeViewModel)
     }
 
     @Composable
-    open fun SetTopBarState(homeViewModel: HomeViewModel, navigator: MrNavigator) {
+    open fun SetTopBarState(
+        activity: Activity,
+        homeViewModel: HomeViewModel,
+        navigator: MrNavigator,
+        defaultNavBackScreen: AndroidScreen?
+    ) {
         homeViewModel.setTopBarState(TopBarState.None)
     }
 

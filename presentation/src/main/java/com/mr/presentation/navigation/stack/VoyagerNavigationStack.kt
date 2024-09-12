@@ -1,9 +1,8 @@
-package com.mr.presentation.navigation
+package com.mr.presentation.navigation.stack
 
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.stack.StackEvent
 import cafe.adriel.voyager.navigator.Navigator
-import com.mr.presentation.navigation.stack.Stack
 
 class VoyagerNavigationStack(val navigator: Navigator): Stack<Screen, StackEvent> {
     override val items: List<Screen>

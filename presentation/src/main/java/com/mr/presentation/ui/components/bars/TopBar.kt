@@ -32,8 +32,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.mr.domain.navigation.UiConfig
 import com.mr.presentation.home.base.TopBarState
-import com.mr.presentation.navigation.MrNavigator
-import com.mr.presentation.navigation.actions.TopBarNavigationAction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,27 +51,10 @@ fun TopBar(topBarState: TopBarState) {
             animationSpec = tween(durationMillis = animDuration)
         )
     ) {
-        val navigator: MrNavigator? = when (topBarState) {
-            is TopBarState.None -> null
-            is TopBarState.Visible -> topBarState.navigator
-        }
-
         val config: TopBarConfig = when (topBarState) {
             is TopBarState.None -> TopBarConfig()
             is TopBarState.Visible -> topBarState.config
         }
-
-        val navigationAction =
-            when (config.navigationAction) {
-                is TopBarNavigationAction.Menu -> config.navigationAction
-                is TopBarNavigationAction.NavigationBack -> {
-                    if (navigator != null && navigator.canPop) {
-                        config.navigationAction
-                    } else null
-                }
-
-                null -> null
-            }
 
         Column(
             modifier = Modifier
@@ -98,15 +79,15 @@ fun TopBar(topBarState: TopBarState) {
                     }
                 },
                 navigationIcon = {
-                    if (navigationAction != null) {
+                    if (config.navigationAction != null) {
                         IconButton(
                             onClick = {
-                                navigationAction.onClick()
+                                config.navigationAction.onClick()
                             }
                         ) {
                             Icon(
-                                imageVector = navigationAction.icon,
-                                contentDescription = stringResource(id = navigationAction.titleResId)
+                                imageVector = config.navigationAction.icon,
+                                contentDescription = stringResource(id = config.navigationAction.titleResId)
                             )
                         }
                     }

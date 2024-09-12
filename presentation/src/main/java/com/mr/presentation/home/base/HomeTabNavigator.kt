@@ -6,24 +6,75 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.tab.CurrentTab
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.mr.domain.model.DeepLink
 import com.mr.domain.navigation.UiConfig
+import com.mr.presentation.home.book.BookTab
+import com.mr.presentation.home.goal.GoalTab
+import com.mr.presentation.home.note.NoteTab
+import com.mr.presentation.home.training.TrainingTab
 import com.mr.presentation.ui.components.bars.BottomBar
 import com.mr.presentation.ui.components.bars.TopBar
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun HomeTabNavigator(
     tabs: List<Tab>,
-    tab: Tab,
+    initialTab: Tab,
     bottomBarVisible: Boolean,
-    topBarState: TopBarState
+    topBarState: TopBarState,
+    viewModel: HomeViewModel,
+    deepLinkPath: String? = null
 ) {
-    TabNavigator(tab = tab) {
+    TabNavigator(tab = initialTab) {
+        val tabNavigator = LocalTabNavigator.current
+        val state by viewModel.state.collectAsState()
+
+        LaunchedEffect(viewModel.effect) {
+            viewModel.effect.collectLatest {
+                when (it) {
+                    is HomeEffect.OnMenuClick -> {
+                        if (it.showMenu) {
+                            state.drawerState.open()
+                        } else {
+                            state.drawerState.close()
+                        }
+                    }
+
+                    is HomeEffect.NavigateToGoalTab -> {
+                        tabNavigator.current = GoalTab(it.deepLink.fullPath)
+                    }
+
+                    is HomeEffect.NavigateToBookTab -> {
+                        tabNavigator.current = BookTab(it.deepLink.fullPath)
+                    }
+
+                    is HomeEffect.NavigateToTrainingTab -> {
+                        tabNavigator.current = TrainingTab(it.deepLink.fullPath)
+                    }
+
+                    is HomeEffect.NavigateToNoteTab -> {
+                        tabNavigator.current = NoteTab(it.deepLink.fullPath)
+                    }
+
+                }
+            }
+        }
+
+        LaunchedEffect(key1 = deepLinkPath) {
+            deepLinkPath?.let {
+                viewModel.handleDeepLink(DeepLink.parse(deepLinkPath))
+            }
+        }
+
         Scaffold(
             topBar = {
                 TopBar(topBarState)

@@ -1,5 +1,6 @@
 package com.mr.presentation.home.training
 
+import android.app.Activity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,12 +10,18 @@ import com.mr.presentation.home.base.HomeViewModel
 import com.mr.presentation.home.base.TopBarState
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.actions.TopBarNavigationAction
+import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.ui.components.bars.TopBarConfig
 
 class TrainingListScreen : AndroidScreenHome() {
 
     @Composable
-    override fun SetTopBarState(homeViewModel: HomeViewModel, navigator: MrNavigator) {
+    override fun SetTopBarState(
+        activity: Activity,
+        homeViewModel: HomeViewModel,
+        navigator: MrNavigator,
+        defaultNavBackScreen: AndroidScreen?
+    ) {
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,

@@ -1,4 +1,4 @@
-package com.mr.presentation.home.base
+package com.mr.presentation.navigation.providers
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -9,26 +9,25 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.NavigatorImpl
 import com.mr.presentation.navigation.NavigatorNoOp
-import com.mr.presentation.ui.animations.DefaultSlideTransition
+import com.mr.presentation.ui.AndroidScreen
 
-val LocalHomeNavigator: ProvidableCompositionLocal<MrNavigator> =
+val LocalMrNavigator: ProvidableCompositionLocal<MrNavigator> =
     staticCompositionLocalOf { NavigatorNoOp() }
 
 @Composable
-fun HomeNavigator(
-    initialScreen: AndroidScreenHome,
-    content: @Composable (homeNavigator: MrNavigator) -> Unit = {}
+fun MrNavigatorProvider(
+    initialScreen: AndroidScreen,
+    content: @Composable (navigator: Navigator) -> Unit
 ) {
     Navigator(initialScreen) { navigator ->
-        val homeNavigator = remember(navigator) {
+        val mainNavigator = remember(navigator) {
             NavigatorImpl(navigator)
         }
 
         CompositionLocalProvider(
-            LocalHomeNavigator provides homeNavigator
+            LocalMrNavigator provides mainNavigator
         ) {
-            DefaultSlideTransition(navigator)
-            content(homeNavigator)
+            content(navigator)
         }
     }
 }

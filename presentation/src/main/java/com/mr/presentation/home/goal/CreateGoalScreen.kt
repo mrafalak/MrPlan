@@ -1,5 +1,6 @@
 package com.mr.presentation.home.goal
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -12,18 +13,28 @@ import com.mr.presentation.home.base.HomeViewModel
 import com.mr.presentation.home.base.TopBarState
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.actions.TopBarNavigationAction
+import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.ui.components.bars.TopBarConfig
 
 class CreateGoalScreen : AndroidScreenHome() {
 
     @Composable
-    override fun SetTopBarState(homeViewModel: HomeViewModel, navigator: MrNavigator) {
+    override fun SetTopBarState(
+        activity: Activity,
+        homeViewModel: HomeViewModel,
+        navigator: MrNavigator,
+        defaultNavBackScreen: AndroidScreen?
+    ) {
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,
                 config = TopBarConfig(
                     titleResId = R.string.nav_goal_create,
-                    navigationAction = TopBarNavigationAction.NavigationBack(navigator)
+                    navigationAction = TopBarNavigationAction.NavigationBack(
+                        activity = activity,
+                        navigator = navigator,
+                        defaultNavBackScreen = defaultNavBackScreen
+                    )
                 ),
             )
         )
@@ -31,6 +42,7 @@ class CreateGoalScreen : AndroidScreenHome() {
 
     @Composable
     override fun Content() {
+        defaultNavBackScreen = GoalListScreen()
         super.Content()
 
         Column(

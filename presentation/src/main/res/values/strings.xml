@@ -1,17 +1,32 @@
 <resources>
     <!--Navigation-->
-    <string name="nav_label_goal">Goal</string>
-    <string name="nav_label_book">Book</string>
-    <string name="nav_label_training">Training</string>
-    <string name="nav_label_note">Note</string>
-    <string name="nav_back">Back</string>
     <string name="nav_menu">Menu</string>
-    <string name="nav_goal_list">Goals</string>
-    <string name="nav_book_list">Books</string>
-    <string name="nav_training_list">Trainings</string>
-    <string name="nav_note_list">Notes</string>
-    <string name="nav_goal_create">Create goal</string>
+    <string name="nav_back">Back</string>
 
-    <!--Top bar icons-->
+    <!--Goal-->
+    <string name="nav_label_goal">Goal</string>
+    <string name="nav_goal_list">Goals</string>
+    <string name="nav_goal_details">Goal Details</string>
+    <string name="nav_goal_create">Create goal</string>
     <string name="ic_goal_add">Add new goal</string>
+
+    <!--Book-->
+    <string name="nav_label_book">Book</string>
+    <string name="nav_book_list">Books</string>
+
+    <!--Training-->
+    <string name="nav_label_training">Training</string>
+    <string name="nav_training_list">Trainings</string>
+
+    <!--Note-->
+    <string name="nav_label_note">Note</string>
+    <string name="nav_note_list">Notes</string>
+    <string name="nav_note_create">Create note</string>
+    <string name="ic_note_add">Add new note</string>
+
+    <!--Settings-->
+    <string name="nav_settings">Settings</string>
+
+    <!--Toast-->
+    <string name="toast_login_to_continue">Log in to continue</string>
 </resources>
