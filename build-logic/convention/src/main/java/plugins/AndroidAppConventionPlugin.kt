@@ -19,12 +19,17 @@ class AndroidAppConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
                 apply("com.google.devtools.ksp")
                 apply("com.google.dagger.hilt.android")
+                apply("com.google.gms.google-services")
+                apply("com.google.firebase.crashlytics")
             }
 
             dependencies {
                 "implementation"(versionCatalog().findLibrary("hilt-android").get())
                 "ksp"(versionCatalog().findLibrary("hilt-android-compiler").get())
                 "implementation"(versionCatalog().findLibrary("timber-core").get())
+                "implementation"(platform(versionCatalog().findLibrary("google-firebase-bom").get()))
+                "implementation"(versionCatalog().findLibrary("google-firebase-analytics").get())
+                "implementation"(versionCatalog().findLibrary("google-firebase-crashlytics").get())
             }
 
             extensions.configure<ApplicationExtension> {

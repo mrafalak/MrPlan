@@ -23,7 +23,7 @@ data class GoalTabState(
 
 @HiltViewModel
 class GoalViewModel @Inject constructor(
-    private val deepLinkRepository: DeepLinkRepository
+    private val deepLinkRepository: DeepLinkRepository,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(GoalTabState())
