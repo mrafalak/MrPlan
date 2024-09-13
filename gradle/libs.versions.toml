@@ -16,6 +16,9 @@ hiltNavigationCompose = "1.2.0"
 voyager = "1.1.0-beta02"
 runtimeLivedata = "1.7.1"
 timber = "5.0.1"
+googleServices = "4.4.2"
+firebase = "33.3.0"
+crashlyticsPlugin = "3.0.2"
 
 [libraries]
 # Android
@@ -58,6 +61,11 @@ voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", 
 # Timber
 timber-core = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
+#Firebase
+google-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
+google-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+google-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleVersion" }
 android-library = { id = "com.android.library", version.ref = "gradleVersion" }
@@ -65,6 +73,8 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt-android-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+google-services-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.ref = "crashlyticsPlugin" }
 
 # Convention plugins
 mrplan-android-application = { id = "mrplan.android.application", version = "unspecified" }

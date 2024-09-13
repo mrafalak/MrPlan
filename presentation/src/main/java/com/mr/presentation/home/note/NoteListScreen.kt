@@ -6,7 +6,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mr.presentation.R
 import com.mr.presentation.home.base.AndroidScreenHome
 import com.mr.presentation.home.base.HomeViewModel
@@ -21,6 +20,8 @@ import kotlinx.coroutines.flow.collectLatest
 
 class NoteListScreen : AndroidScreenHome() {
 
+    private lateinit var viewModel: NoteListViewModel
+
     @Composable
     override fun SetTopBarState(
         activity: Activity,
@@ -28,8 +29,6 @@ class NoteListScreen : AndroidScreenHome() {
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?
     ) {
-        val viewModel: NoteListViewModel = viewModel()
-
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,
@@ -51,9 +50,9 @@ class NoteListScreen : AndroidScreenHome() {
 
     @Composable
     override fun Content() {
+        viewModel = hiltViewModel()
         super.Content()
         val navigator = LocalHomeNavigator.current
-        val viewModel: NoteListViewModel = hiltViewModel()
 
         LaunchedEffect(viewModel.effect) {
             viewModel.effect.collectLatest {

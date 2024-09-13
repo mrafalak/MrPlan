@@ -9,6 +9,9 @@ private const val versionNameMajor = 0
 private const val versionNameMinor = 0
 private const val versionNamePatch = 1
 
+const val ENABLE_CRASHLYTICS = "ENABLE_CRASHLYTICS"
+const val ENABLE_ANALYTICS = "ENABLE_ANALYTICS"
+
 object Config {
     val android = AndroidConfig(
         minSdkVersion = 26,

@@ -12,7 +12,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mr.presentation.R
 import com.mr.presentation.home.base.AndroidScreenHome
 import com.mr.presentation.home.base.HomeViewModel
@@ -27,6 +26,8 @@ import kotlinx.coroutines.flow.collectLatest
 
 class GoalListScreen : AndroidScreenHome() {
 
+    private lateinit var viewModel: GoalListViewModel
+
     @Composable
     override fun SetTopBarState(
         activity: Activity,
@@ -34,8 +35,6 @@ class GoalListScreen : AndroidScreenHome() {
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?
     ) {
-        val viewModel: GoalListViewModel = viewModel()
-
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,
@@ -57,9 +56,10 @@ class GoalListScreen : AndroidScreenHome() {
 
     @Composable
     override fun Content() {
+        viewModel = hiltViewModel()
         super.Content()
+
         val navigator = LocalHomeNavigator.current
-        val viewModel: GoalListViewModel = hiltViewModel()
         val state by viewModel.state.collectAsState()
 
         LaunchedEffect(viewModel.effect) {
