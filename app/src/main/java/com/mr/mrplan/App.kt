@@ -21,12 +21,8 @@ class App : Application() {
     }
 
     private fun configureFirebase() {
-        if (BuildConfig.DEBUG) {
-            firebaseCrashlytics.isCrashlyticsCollectionEnabled = false
-            firebaseAnalytics.setAnalyticsCollectionEnabled(false)
-        } else {
-            firebaseCrashlytics.isCrashlyticsCollectionEnabled = true
-            firebaseAnalytics.setAnalyticsCollectionEnabled(true)
-        }
+        // TODO ask user for permission to send analytics data
+        firebaseCrashlytics.isCrashlyticsCollectionEnabled = BuildConfig.ENABLE_CRASHLYTICS
+        firebaseAnalytics.setAnalyticsCollectionEnabled(BuildConfig.ENABLE_ANALYTICS)
     }
 }
