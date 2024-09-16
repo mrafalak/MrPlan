@@ -20,8 +20,6 @@ import kotlinx.coroutines.flow.collectLatest
 
 class NoteListScreen : AndroidScreenHome() {
 
-    private lateinit var viewModel: NoteListViewModel
-
     @Composable
     override fun SetTopBarState(
         activity: Activity,
@@ -29,6 +27,8 @@ class NoteListScreen : AndroidScreenHome() {
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?
     ) {
+        val viewModel: NoteListViewModel = hiltViewModel()
+
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,
@@ -50,8 +50,8 @@ class NoteListScreen : AndroidScreenHome() {
 
     @Composable
     override fun Content() {
-        viewModel = hiltViewModel()
         super.Content()
+        val viewModel: NoteListViewModel = hiltViewModel()
         val navigator = LocalHomeNavigator.current
 
         LaunchedEffect(viewModel.effect) {

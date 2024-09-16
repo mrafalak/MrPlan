@@ -26,8 +26,6 @@ import kotlinx.coroutines.flow.collectLatest
 
 class GoalListScreen : AndroidScreenHome() {
 
-    private lateinit var viewModel: GoalListViewModel
-
     @Composable
     override fun SetTopBarState(
         activity: Activity,
@@ -35,6 +33,8 @@ class GoalListScreen : AndroidScreenHome() {
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?
     ) {
+        val viewModel: GoalListViewModel = hiltViewModel()
+
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,
@@ -56,9 +56,8 @@ class GoalListScreen : AndroidScreenHome() {
 
     @Composable
     override fun Content() {
-        viewModel = hiltViewModel()
         super.Content()
-
+        val viewModel: GoalListViewModel = hiltViewModel()
         val navigator = LocalHomeNavigator.current
         val state by viewModel.state.collectAsState()
 
