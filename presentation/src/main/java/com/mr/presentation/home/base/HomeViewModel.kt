@@ -11,10 +11,8 @@ import com.mr.domain.repository.DeepLinkRepository
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.actions.MenuNavigationHandler
 import com.mr.domain.model.toDeepLinkHomeDirection
-import com.mr.presentation.home.book.BookTab
-import com.mr.presentation.home.goal.GoalTab
-import com.mr.presentation.home.note.NoteTab
-import com.mr.presentation.home.training.TrainingTab
+import com.mr.presentation.home.task.TaskTab
+import com.mr.presentation.home.today.TodayTab
 import com.mr.presentation.ui.components.bars.TopBarConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -27,12 +25,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class HomeState(
-    val initialTab: Tab = GoalTab(),
+    val initialTab: Tab = TodayTab(),
     val bottomBarTabs: List<Tab> = listOf(
-        GoalTab(),
-        BookTab(),
-        TrainingTab(),
-        NoteTab(),
+        TodayTab(),
+        TaskTab(),
     ),
     val topBarState: TopBarState = TopBarState.None,
     val bottomBarVisible: Boolean = false,
@@ -63,20 +59,12 @@ class HomeViewModel @Inject constructor(
             val homeDirection = deepLink.subPaths.firstOrNull()?.toDeepLinkHomeDirection()
                 ?: DeepLinkHomeDirection.NONE
             when (homeDirection) {
-                DeepLinkHomeDirection.GOAL -> {
-                    _effect.send(HomeEffect.NavigateToGoalTab(deepLink))
+                DeepLinkHomeDirection.TODAY -> {
+                    _effect.send(HomeEffect.NavigateToTodayTab(deepLink))
                 }
 
-                DeepLinkHomeDirection.BOOK -> {
-                    _effect.send(HomeEffect.NavigateToBookTab(deepLink))
-                }
-
-                DeepLinkHomeDirection.TRAINING -> {
-                    _effect.send(HomeEffect.NavigateToTrainingTab(deepLink))
-                }
-
-                DeepLinkHomeDirection.NOTE -> {
-                    _effect.send(HomeEffect.NavigateToNoteTab(deepLink))
+                DeepLinkHomeDirection.TASK -> {
+                    _effect.send(HomeEffect.NavigateToTaskTab(deepLink))
                 }
 
                 DeepLinkHomeDirection.NONE -> Unit
@@ -113,8 +101,6 @@ sealed class TopBarState {
 
 sealed class HomeEffect {
     data class OnMenuClick(val showMenu: Boolean = false) : HomeEffect()
-    data class NavigateToGoalTab(val deepLink: DeepLink) : HomeEffect()
-    data class NavigateToBookTab(val deepLink: DeepLink) : HomeEffect()
-    data class NavigateToTrainingTab(val deepLink: DeepLink) : HomeEffect()
-    data class NavigateToNoteTab(val deepLink: DeepLink) : HomeEffect()
+    data class NavigateToTodayTab(val deepLink: DeepLink) : HomeEffect()
+    data class NavigateToTaskTab(val deepLink: DeepLink) : HomeEffect()
 }

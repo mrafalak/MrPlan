@@ -1,4 +1,4 @@
-package com.mr.presentation.home.book
+package com.mr.presentation.home.task
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import com.mr.presentation.navigation.actions.TopBarNavigationAction
 import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.ui.components.bars.TopBarConfig
 
-class BookListScreen : AndroidScreenHome() {
+class TaskCreateScreen : AndroidScreenHome() {
 
     @Composable
     override fun SetTopBarState(
@@ -29,26 +29,26 @@ class BookListScreen : AndroidScreenHome() {
             TopBarState.Visible(
                 navigator = navigator,
                 config = TopBarConfig(
-                    titleResId = R.string.nav_book_list,
-                    navigationAction = TopBarNavigationAction.Menu(homeViewModel),
-                )
+                    titleResId = R.string.nav_task_create,
+                    navigationAction = TopBarNavigationAction.NavigationBack(
+                        activity = activity,
+                        navigator = navigator,
+                        defaultNavBackScreen = defaultNavBackScreen
+                    )
+                ),
             )
         )
     }
 
     @Composable
-    override fun SetBottomBarVisibility(homeViewModel: HomeViewModel) {
-        homeViewModel.setBottomBarVisible(true)
-    }
-
-    @Composable
     override fun Content() {
+        defaultNavBackScreen = TaskListScreen()
         super.Content()
 
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            Text(text = "Hello in Book List Screen", style = MaterialTheme.typography.titleLarge)
+            Text(text = "Hello in Create Task Screen", style = MaterialTheme.typography.titleLarge)
         }
     }
 }

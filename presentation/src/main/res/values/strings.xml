@@ -3,26 +3,15 @@
     <string name="nav_menu">Menu</string>
     <string name="nav_back">Back</string>
 
-    <!--Goal-->
-    <string name="nav_label_goal">Goal</string>
-    <string name="nav_goal_list">Goals</string>
-    <string name="nav_goal_details">Goal Details</string>
-    <string name="nav_goal_create">Create goal</string>
-    <string name="ic_goal_add">Add new goal</string>
+    <!--Today-->
+    <string name="nav_label_today">Today</string>
 
-    <!--Book-->
-    <string name="nav_label_book">Book</string>
-    <string name="nav_book_list">Books</string>
-
-    <!--Training-->
-    <string name="nav_label_training">Training</string>
-    <string name="nav_training_list">Trainings</string>
-
-    <!--Note-->
-    <string name="nav_label_note">Note</string>
-    <string name="nav_note_list">Notes</string>
-    <string name="nav_note_create">Create note</string>
-    <string name="ic_note_add">Add new note</string>
+    <!--Task-->
+    <string name="nav_label_task">Task</string>
+    <string name="nav_task_single">Single</string>
+    <string name="nav_task_recurring">Recurring</string>
+    <string name="nav_task_create">Create Task</string>
+    <string name="ic_task_add">Add new task</string>
 
     <!--Settings-->
     <string name="nav_settings">Settings</string>
