@@ -1,10 +1,15 @@
-package com.mr.presentation.home.note
+package com.mr.presentation.home.task
 
 import android.app.Activity
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mr.presentation.R
 import com.mr.presentation.home.base.AndroidScreenHome
@@ -18,7 +23,7 @@ import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.ui.components.bars.TopBarConfig
 import kotlinx.coroutines.flow.collectLatest
 
-class NoteListScreen : AndroidScreenHome() {
+class TaskListScreen : AndroidScreenHome() {
 
     @Composable
     override fun SetTopBarState(
@@ -27,16 +32,16 @@ class NoteListScreen : AndroidScreenHome() {
         navigator: MrNavigator,
         defaultNavBackScreen: AndroidScreen?
     ) {
-        val viewModel: NoteListViewModel = hiltViewModel()
+        val viewModel: TaskListViewModel = hiltViewModel()
 
         homeViewModel.setTopBarState(
             TopBarState.Visible(
                 navigator = navigator,
                 config = TopBarConfig(
-                    titleResId = R.string.nav_note_list,
+                    titleResId = R.string.nav_label_task,
                     navigationAction = TopBarNavigationAction.Menu(homeViewModel),
                     actions = listOf(
-                        TopBarAction.Add(viewModel, R.string.ic_note_add)
+                        TopBarAction.Add(viewModel, R.string.ic_task_add)
                     )
                 )
             )
@@ -51,19 +56,24 @@ class NoteListScreen : AndroidScreenHome() {
     @Composable
     override fun Content() {
         super.Content()
-        val viewModel: NoteListViewModel = hiltViewModel()
+        val viewModel: TaskListViewModel = hiltViewModel()
         val navigator = LocalHomeNavigator.current
+        val state by viewModel.state.collectAsState()
 
         LaunchedEffect(viewModel.effect) {
             viewModel.effect.collectLatest {
                 when (it) {
-                    NoteListEffect.NavigateToCreateNote -> {
-                        navigator.push(CreateNoteScreen())
+                    TaskListEffect.NavigateToTaskCreate -> {
+                        navigator.push(TaskCreateScreen())
                     }
                 }
             }
         }
 
-        Text(text = "Hello in Note List Screen", style = MaterialTheme.typography.titleLarge)
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(text = "Hello in Task List Screen", style = MaterialTheme.typography.titleLarge)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.mr.presentation.home.goal
+package com.mr.presentation.home.today
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,19 +16,19 @@ import com.mr.presentation.home.base.HomeNavigator
 import com.mr.domain.model.HomeTabEnum
 import kotlinx.coroutines.flow.collectLatest
 
-class GoalTab(
+class TodayTab(
     private val deepLinkPath: String? = null
 ) : Tab {
 
     override val options: TabOptions
         @Composable
         get() {
-            val title = stringResource(R.string.nav_label_goal)
-            val icon = painterResource(R.drawable.ic_goal_24)
+            val title = stringResource(R.string.nav_label_today)
+            val icon = painterResource(R.drawable.ic_today_24)
 
             return remember {
                 TabOptions(
-                    index = HomeTabEnum.GOAL.index,
+                    index = HomeTabEnum.TODAY.index,
                     title = title,
                     icon = icon
                 )
@@ -37,20 +37,14 @@ class GoalTab(
 
     @Composable
     override fun Content() {
-        val viewModel: GoalViewModel = hiltViewModel()
+        val viewModel: TodayTabViewModel = hiltViewModel()
         val state by viewModel.state.collectAsState()
 
         HomeNavigator(initialScreen = state.initialScreen) { homeNavigator ->
             LaunchedEffect(viewModel.effect) {
                 viewModel.effect.collectLatest {
                     when (it) {
-                        GoalEffect.NavigateToGoalDetails -> {
-                            homeNavigator.noDebounce.push(GoalDetailsScreen())
-                        }
-
-                        GoalEffect.NavigateToGoalCreate -> {
-                            homeNavigator.noDebounce.push(CreateGoalScreen())
-                        }
+                        TodayTabEffect.NavigateToTaskCreate -> TODO()
                     }
                 }
             }

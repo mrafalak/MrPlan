@@ -17,10 +17,8 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.mr.domain.model.DeepLink
 import com.mr.domain.navigation.UiConfig
-import com.mr.presentation.home.book.BookTab
-import com.mr.presentation.home.goal.GoalTab
-import com.mr.presentation.home.note.NoteTab
-import com.mr.presentation.home.training.TrainingTab
+import com.mr.presentation.home.task.TaskTab
+import com.mr.presentation.home.today.TodayTab
 import com.mr.presentation.ui.components.bars.BottomBar
 import com.mr.presentation.ui.components.bars.TopBar
 import kotlinx.coroutines.flow.collectLatest
@@ -49,22 +47,13 @@ fun HomeTabNavigator(
                         }
                     }
 
-                    is HomeEffect.NavigateToGoalTab -> {
-                        tabNavigator.current = GoalTab(it.deepLink.fullPath)
+                    is HomeEffect.NavigateToTodayTab -> {
+                        tabNavigator.current = TodayTab(it.deepLink.fullPath)
                     }
 
-                    is HomeEffect.NavigateToBookTab -> {
-                        tabNavigator.current = BookTab(it.deepLink.fullPath)
+                    is HomeEffect.NavigateToTaskTab -> {
+                        tabNavigator.current = TaskTab(it.deepLink.fullPath)
                     }
-
-                    is HomeEffect.NavigateToTrainingTab -> {
-                        tabNavigator.current = TrainingTab(it.deepLink.fullPath)
-                    }
-
-                    is HomeEffect.NavigateToNoteTab -> {
-                        tabNavigator.current = NoteTab(it.deepLink.fullPath)
-                    }
-
                 }
             }
         }

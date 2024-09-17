@@ -1,10 +1,8 @@
 package com.mr.domain.model
 
 enum class DeepLinkHomeDirection(val path: String) {
-    GOAL(path = "goal"),
-    BOOK(path = "book"),
-    TRAINING(path = "training"),
-    NOTE(path = "note"),
+    TODAY(path = "today"),
+    TASK(path = "task"),
     NONE(path = ""),
 }
 
