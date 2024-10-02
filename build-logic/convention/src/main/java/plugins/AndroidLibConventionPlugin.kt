@@ -3,7 +3,7 @@ package plugins
 import com.android.build.gradle.LibraryExtension
 import config.Config
 import extensions.configureAndroidKotlin
-import extensions.configureBuildTypes
+import extensions.configureLibraryBuildTypes
 import extensions.versionCatalog
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -32,7 +32,7 @@ class AndroidLibConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 configureAndroidKotlin(this)
-                configureBuildTypes(this)
+                configureLibraryBuildTypes(this)
 
                 defaultConfig.targetSdk = Config.android.targetSdkVersion
 
