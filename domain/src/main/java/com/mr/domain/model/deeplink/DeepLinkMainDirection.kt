@@ -1,4 +1,4 @@
-package com.mr.domain.model
+package com.mr.domain.model.deeplink
 
 enum class DeepLinkMainDirection(val path: String) {
     HOME(path = "home"),

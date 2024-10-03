@@ -1,4 +1,4 @@
-package com.mr.domain.model
+package com.mr.domain.model.deeplink
 
 import android.net.Uri
 

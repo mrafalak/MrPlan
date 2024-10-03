@@ -5,12 +5,12 @@ import androidx.compose.material3.DrawerValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.navigator.tab.Tab
-import com.mr.domain.model.DeepLink
-import com.mr.domain.model.DeepLinkHomeDirection
+import com.mr.domain.model.deeplink.DeepLink
+import com.mr.domain.model.deeplink.DeepLinkHomeDirection
 import com.mr.domain.repository.DeepLinkRepository
 import com.mr.presentation.navigation.MrNavigator
 import com.mr.presentation.navigation.actions.MenuNavigationHandler
-import com.mr.domain.model.toDeepLinkHomeDirection
+import com.mr.domain.model.deeplink.toDeepLinkHomeDirection
 import com.mr.presentation.home.task.TaskTab
 import com.mr.presentation.home.today.TodayTab
 import com.mr.presentation.ui.components.bars.TopBarConfig
