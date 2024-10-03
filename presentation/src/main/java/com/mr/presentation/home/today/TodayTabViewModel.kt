@@ -3,10 +3,10 @@ package com.mr.presentation.home.today
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mr.common.utils.createTabDeepLinkSubList
-import com.mr.domain.model.DeepLink
-import com.mr.domain.model.DeepLinkHomeDirection
-import com.mr.domain.model.DeepLinkTodayDirection
-import com.mr.domain.model.toDeepLinkTodayDirection
+import com.mr.domain.model.deeplink.DeepLink
+import com.mr.domain.model.deeplink.DeepLinkHomeDirection
+import com.mr.domain.model.deeplink.DeepLinkTodayDirection
+import com.mr.domain.model.deeplink.toDeepLinkTodayDirection
 import com.mr.domain.repository.DeepLinkRepository
 import com.mr.presentation.home.base.AndroidScreenHome
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -10,10 +10,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.mr.domain.model.DeepLink
+import com.mr.domain.model.deeplink.DeepLink
 import com.mr.presentation.R
 import com.mr.presentation.home.base.HomeNavigator
-import com.mr.domain.model.HomeTabEnum
+import com.mr.domain.navigation.HomeTabEnum
 import kotlinx.coroutines.flow.collectLatest
 
 class TodayTab(

@@ -1,4 +1,4 @@
-package com.mr.domain.model
+package com.mr.domain.model.deeplink
 
 enum class DeepLinkTodayDirection(val path: String) {
     TASK_CREATE(path = "task_create"),

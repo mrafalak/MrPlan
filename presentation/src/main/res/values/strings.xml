@@ -3,6 +3,11 @@
     <string name="nav_menu">Menu</string>
     <string name="nav_back">Back</string>
 
+    <!--Login-->
+    <string name="button_login">Login</string>
+    <string name="header_welcome_screen">MrPlan</string>
+    <string name="error_login">Login or password incorrect</string>
+
     <!--Today-->
     <string name="nav_label_today">Today</string>
 

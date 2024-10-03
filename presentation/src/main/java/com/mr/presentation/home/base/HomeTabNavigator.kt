@@ -15,7 +15,7 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.mr.domain.model.DeepLink
+import com.mr.domain.model.deeplink.DeepLink
 import com.mr.domain.navigation.UiConfig
 import com.mr.presentation.home.task.TaskTab
 import com.mr.presentation.home.today.TodayTab

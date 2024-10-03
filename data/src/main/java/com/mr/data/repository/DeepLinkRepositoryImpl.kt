@@ -1,6 +1,6 @@
 package com.mr.data.repository
 
-import com.mr.domain.model.DeepLink
+import com.mr.domain.model.deeplink.DeepLink
 import com.mr.domain.repository.DeepLinkRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
