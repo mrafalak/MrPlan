@@ -1,11 +1,14 @@
 package com.mr.domain.repository
 
-import com.mr.domain.model.util.Result
-import kotlinx.coroutines.flow.Flow
+import com.google.firebase.auth.FirebaseUser
+import com.mr.domain.state.AuthState
 import kotlinx.coroutines.flow.StateFlow
 
 interface SessionRepository {
-    val isUserLogged: StateFlow<Boolean>
+    val authState: StateFlow<AuthState>
 
-    fun login(): Flow<Result<Boolean>>
+    fun login(user: FirebaseUser)
+    fun setUserNotSigned()
+    fun loginCancelled()
+    fun loginError(errorCode: Int?)
 }

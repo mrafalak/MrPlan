@@ -25,7 +25,11 @@ class AndroidLibConventionPlugin : Plugin<Project> {
                 "implementation"(versionCatalog().findLibrary("hilt-android").get())
                 "ksp"(versionCatalog().findLibrary("hilt-android-compiler").get())
                 "implementation"(versionCatalog().findLibrary("timber-core").get())
-                "implementation"(platform(versionCatalog().findLibrary("google-firebase-bom").get()))
+                "implementation"(
+                    platform(
+                        versionCatalog().findLibrary("google-firebase-bom").get()
+                    )
+                )
                 "implementation"(versionCatalog().findLibrary("google-firebase-analytics").get())
                 "implementation"(versionCatalog().findLibrary("google-firebase-crashlytics").get())
             }

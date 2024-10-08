@@ -24,6 +24,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.mr.presentation.R
 import com.mr.presentation.components.MrButton
 import com.mr.presentation.home.base.HomeScreen
+import com.mr.presentation.main.LocalActivity
+import com.mr.presentation.main.MainViewModel
 import com.mr.presentation.navigation.providers.LocalMrNavigator
 import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.ui.theme.MrPlanTheme
@@ -35,7 +37,9 @@ class WelcomeScreen : AndroidScreen() {
     override fun Content() {
         val navigator = LocalMrNavigator.current
         val context = LocalContext.current
+        val activity = LocalActivity.current
         val viewModel: WelcomeViewModel = hiltViewModel()
+        val mainViewModel: MainViewModel = hiltViewModel(activity)
 
         LaunchedEffect(viewModel.effect) {
             viewModel.effect.collectLatest { effect ->
@@ -54,7 +58,8 @@ class WelcomeScreen : AndroidScreen() {
                 }
             }
         }
-        WelcomeScreenContent(onLogin = { viewModel.login() })
+
+        WelcomeScreenContent(onLogin = { mainViewModel.loginWithGoogle() })
     }
 }
 

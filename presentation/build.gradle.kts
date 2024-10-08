@@ -17,4 +17,6 @@ dependencies {
     implementation(libs.bundles.ui.all)
 
     implementation(libs.bundles.voyager.all)
+
+    implementation(libs.google.firebase.auth)
 }
