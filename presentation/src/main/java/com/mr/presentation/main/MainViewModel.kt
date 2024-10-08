@@ -1,17 +1,16 @@
 package com.mr.presentation.main
 
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
-import com.google.firebase.auth.FirebaseAuth
 import com.mr.domain.model.deeplink.DeepLink
 import com.mr.domain.repository.DeepLinkRepository
 import com.mr.domain.model.deeplink.DeepLinkMainDirection
 import com.mr.domain.repository.SessionRepository
 import com.mr.domain.state.AuthState
+import com.mr.presentation.BuildConfig
 import com.mr.presentation.home.base.HomeScreen
 import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.welcome.WelcomeScreen
@@ -65,7 +64,7 @@ class MainViewModel @Inject constructor(
 
         val screen = when {
             isIntentWithDeepLink -> WelcomeScreen()
-//            BuildConfig.DEBUG -> HomeScreen()
+            BuildConfig.DEBUG -> HomeScreen()
             authState is AuthState.SignedIn -> {
                 HomeScreen()
             }
@@ -113,22 +112,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-        val response = result.idpResponse
-        if (result.resultCode == RESULT_OK) {
-            val auth = FirebaseAuth.getInstance()
-            val user = auth.currentUser
-            if (user != null) {
-                sessionRepository.login(user)
-            } else {
-                auth.signOut()
-            }
-        } else {
-            if (response == null) {
-                sessionRepository.loginCancelled()
-            } else {
-                sessionRepository.loginError(response.error?.errorCode)
-            }
-        }
+        sessionRepository.handleFirebaseLoginResult(result)
     }
 }
 

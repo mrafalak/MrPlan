@@ -9,7 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.mr.presentation.R
 import com.mr.presentation.navigation.MrNavigator
+import com.mr.presentation.profile.ProfileScreen
 import com.mr.presentation.settings.SettingsScreen
+import com.mr.presentation.ui.AndroidScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -20,16 +22,23 @@ fun HomeNavDrawer(
     scope: CoroutineScope,
     navigator: MrNavigator
 ) {
+    val screenItems: Map<Int, AndroidScreen> = mapOf(
+        R.string.nav_profile to ProfileScreen(),
+        R.string.nav_settings to SettingsScreen()
+    )
+
     ModalDrawerSheet(modifier = modifier) {
-        NavigationDrawerItem(
-            label = { Text(stringResource(id = R.string.nav_settings)) },
-            selected = false,
-            onClick = {
-                navigator.push(SettingsScreen())
-                scope.launch {
-                    state.close()
+        screenItems.forEach { item ->
+            NavigationDrawerItem(
+                label = { Text(stringResource(id = item.key)) },
+                selected = false,
+                onClick = {
+                    navigator.push(item.value)
+                    scope.launch {
+                        state.close()
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }
