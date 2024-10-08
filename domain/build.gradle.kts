@@ -8,4 +8,6 @@ android {
 
 dependencies {
     implementation(project(":common"))
+
+    implementation(libs.google.firebase.auth)
 }

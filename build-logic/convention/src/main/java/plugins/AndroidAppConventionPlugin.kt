@@ -35,6 +35,7 @@ class AndroidAppConventionPlugin : Plugin<Project> {
                 )
                 "implementation"(versionCatalog().findLibrary("google-firebase-analytics").get())
                 "implementation"(versionCatalog().findLibrary("google-firebase-crashlytics").get())
+                "implementation"(versionCatalog().findLibrary("google-firebase-auth").get())
             }
 
             extensions.configure<ApplicationExtension> {

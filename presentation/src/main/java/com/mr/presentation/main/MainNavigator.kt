@@ -7,6 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import com.mr.domain.state.AuthState
 import com.mr.presentation.R
 import com.mr.presentation.home.base.HomeScreen
 import com.mr.presentation.navigation.MrNavigator
@@ -40,7 +41,7 @@ private fun HandleMainEffect(viewModel: MainViewModel) {
                     handleNavigateToHomeScreen(
                         context = context,
                         navigator = navigator,
-                        isUserLogged = state.isUserLogged,
+                        isUserLogged = state.authState is AuthState.SignedIn,
                         deepLinkFullPath = mainEffect.deepLink.fullPath
                     )
                 }

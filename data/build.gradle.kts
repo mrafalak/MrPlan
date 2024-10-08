@@ -8,4 +8,6 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+
+    implementation(libs.google.firebase.auth)
 }

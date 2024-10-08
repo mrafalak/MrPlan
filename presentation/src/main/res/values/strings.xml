@@ -6,7 +6,7 @@
     <!--Login-->
     <string name="button_login">Login</string>
     <string name="header_welcome_screen">MrPlan</string>
-    <string name="error_login">Login or password incorrect</string>
+    <string name="error_login">Failed to log in</string>
 
     <!--Today-->
     <string name="nav_label_today">Today</string>
