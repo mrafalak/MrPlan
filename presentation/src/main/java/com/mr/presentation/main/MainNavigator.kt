@@ -15,6 +15,7 @@ import com.mr.presentation.navigation.providers.LocalMrNavigator
 import com.mr.presentation.navigation.providers.MrNavigatorProvider
 import com.mr.presentation.ui.AndroidScreen
 import com.mr.presentation.ui.animations.DefaultFadeTransition
+import com.mr.presentation.welcome.WelcomeScreen
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -45,6 +46,8 @@ private fun HandleMainEffect(viewModel: MainViewModel) {
                         deepLinkFullPath = mainEffect.deepLink.fullPath
                     )
                 }
+
+                is MainEffect.NavigateToWelcomeScreen -> navigator.noDebounce.replaceAll(WelcomeScreen())
             }
         }
     }

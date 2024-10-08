@@ -13,4 +13,5 @@ interface SessionRepository {
     fun setUserNotSigned()
     fun loginCancelled()
     fun loginError(errorCode: Int?)
+    suspend fun logout()
 }

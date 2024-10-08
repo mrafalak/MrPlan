@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mr.domain.repository.SessionRepository
 import com.mr.domain.state.AuthState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -55,5 +56,13 @@ class SessionRepositoryImpl @Inject constructor() : SessionRepository {
 
     override fun loginError(errorCode: Int?) {
         _authState.value = AuthState.Error(errorCode)
+    }
+
+    override suspend fun logout() {
+        FirebaseAuth.getInstance().signOut()
+        _authState.value = AuthState.SignedOut
+        delay(1000).run {
+            setUserNotSigned()
+        }
     }
 }

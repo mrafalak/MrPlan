@@ -7,6 +7,7 @@ import com.mr.domain.repository.SessionRepository
 import com.mr.domain.state.AuthState
 import com.mr.presentation.BuildConfig
 import com.mr.presentation.home.base.TopBarState
+import com.mr.presentation.navigation.actions.LogoutActionHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,7 +27,7 @@ data class ProfileState(
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val sessionRepository: SessionRepository
-) : ViewModel() {
+) : ViewModel(), LogoutActionHandler {
 
     private val _state = MutableStateFlow(ProfileState())
     val state = _state.asStateFlow()
@@ -37,18 +38,26 @@ class ProfileViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             sessionRepository.authState.collect { authState ->
-                if (authState is AuthState.SignedIn) {
-                    _state.update {
-                        it.copy(
-                            userPhoto = authState.user.photoUrl,
-                            userDisplayName = authState.user.displayName,
-                            userEmail = authState.user.email
-                        )
-                    }
-                } else if (BuildConfig.DEBUG) {
+                if (BuildConfig.DEBUG) {
                     _state.update { DebugProfileState }
                 } else {
-                    _effect.send(ProfileEffect.UserNotFound)
+                    when (authState) {
+                        is AuthState.SignedIn -> {
+                            _state.update {
+                                it.copy(
+                                    userPhoto = authState.user.photoUrl,
+                                    userDisplayName = authState.user.displayName,
+                                    userEmail = authState.user.email
+                                )
+                            }
+                        }
+
+                        AuthState.NotSigned -> {
+                            _effect.send(ProfileEffect.UserNotFound)
+                        }
+
+                        else -> Unit
+                    }
                 }
             }
         }
@@ -56,6 +65,12 @@ class ProfileViewModel @Inject constructor(
 
     fun setTopBarState(state: TopBarState) {
         _state.update { it.copy(topBarState = state) }
+    }
+
+    override fun onLogout() {
+        viewModelScope.launch {
+            sessionRepository.logout()
+        }
     }
 }
 

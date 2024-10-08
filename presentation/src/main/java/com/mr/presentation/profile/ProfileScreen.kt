@@ -41,6 +41,7 @@ import com.mr.domain.navigation.UiConfig
 import com.mr.presentation.R
 import com.mr.presentation.home.base.TopBarState
 import com.mr.presentation.main.LocalActivity
+import com.mr.presentation.navigation.actions.TopBarAction
 import com.mr.presentation.navigation.actions.TopBarNavigationAction
 import com.mr.presentation.navigation.providers.LocalMrNavigator
 import com.mr.presentation.settings.DebugProfileState
@@ -72,6 +73,12 @@ class ProfileScreen : AndroidScreen() {
                         navigationAction = TopBarNavigationAction.NavigationBack(
                             activity = activity,
                             navigator = navigator,
+                        ),
+                        actions = listOf(
+                            TopBarAction.Logout(
+                                viewModel,
+                                R.string.ic_logout
+                            )
                         )
                     ),
                 )
