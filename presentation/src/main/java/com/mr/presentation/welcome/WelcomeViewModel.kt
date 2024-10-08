@@ -15,6 +15,9 @@ class WelcomeViewModel @Inject constructor(
     private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
+    private val _effect = Channel<WelcomeEffect>()
+    val effect = _effect.receiveAsFlow()
+
     init {
         viewModelScope.launch {
             sessionRepository.authState.collect { authState ->
@@ -26,9 +29,6 @@ class WelcomeViewModel @Inject constructor(
             }
         }
     }
-
-    private val _effect = Channel<WelcomeEffect>()
-    val effect = _effect.receiveAsFlow()
 }
 
 sealed class WelcomeEffect {

@@ -6,6 +6,7 @@ coreKtx = "1.13.1"
 lifecycleRuntimeKtx = "2.8.5"
 activityCompose = "1.9.2"
 composeBom = "2024.09.01"
+coil = "3.0.0-rc01"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -39,6 +40,9 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+io-coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+io-coil-test = { group = "io.coil-kt.coil3", name = "coil-test", version.ref = "coil" }
+
 # UI platform
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -86,5 +90,5 @@ mrplan-android-lib-compose = { id = "mrplan.android.lib.compose", version = "uns
 
 [bundles]
 ui-all = ["androidx-activity-compose", "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling",
-    "androidx-ui-tooling-preview", "androidx-material3", "androidx-lifecycle-runtime-ktx", "androidx-runtime-livedata", "hilt-navigation-compose"]
+    "androidx-ui-tooling-preview", "androidx-material3", "androidx-lifecycle-runtime-ktx", "androidx-runtime-livedata", "hilt-navigation-compose", "io-coil-compose", "io-coil-test"]
 voyager-all = ["voyager-navigator", "voyager-hilt", "voyager-transitions", "voyager-tab-navigator"]
