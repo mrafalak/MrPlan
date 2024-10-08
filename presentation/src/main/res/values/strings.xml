@@ -24,6 +24,7 @@
     <!--Profile-->
     <string name="nav_profile">Profile</string>
     <string name="description_user_avatar">"User avatar"</string>
+    <string name="ic_logout">Logout user</string>
 
     <!--Toast-->
     <string name="toast_login_to_continue">Log in to continue</string>

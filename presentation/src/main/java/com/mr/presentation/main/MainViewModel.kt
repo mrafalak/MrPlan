@@ -56,6 +56,17 @@ class MainViewModel @Inject constructor(
                 handleDeepLink(deepLink)
             }
         }
+        viewModelScope.launch {
+            sessionRepository.authState.collect {
+                when (it) {
+                    is AuthState.SignedOut -> {
+                        _effect.send(MainEffect.NavigateToWelcomeScreen)
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
     }
 
     fun determineInitialScreen(intent: Intent) {
@@ -118,4 +129,5 @@ class MainViewModel @Inject constructor(
 
 sealed class MainEffect {
     data class NavigateToHomeScreen(val deepLink: DeepLink) : MainEffect()
+    data object NavigateToWelcomeScreen : MainEffect()
 }
